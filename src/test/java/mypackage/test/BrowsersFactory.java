@@ -33,7 +33,7 @@ public class BrowsersFactory {
         @Override
         public void onException(Throwable throwable, WebDriver driver) {
             File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            File file = new File("target", "sccreen-" + System.currentTimeMillis() + ".png");
+            File file = new File("target", "screen-" + System.currentTimeMillis() + ".png");
             try {
                 Files.copy(tmp, file);
             } catch (IOException e) {
