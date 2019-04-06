@@ -6,8 +6,6 @@ import mypackage.pages.TinkoffTariffPage;
 import org.junit.Test;
 
 import static mypackage.app.Application.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class Tests extends BaseRunner {
     @Test
@@ -85,8 +83,8 @@ public class Tests extends BaseRunner {
         tinkoffTariff.setCheckBox("On","Режим модема");
         tinkoffTariff.setCheckBox("On","Безлимитные СМС");
         String priceKrasnodarMax = tinkoffTariff.checkPrice();
-        assertNotEquals(priceMoscowDefault,priceKrasnodarDefault);
-        assertEquals(priceMoscowMax,priceKrasnodarMax);
+        tinkoffTariff.checkPriceEquals(false,priceMoscowDefault,priceKrasnodarDefault);
+        tinkoffTariff.checkPriceEquals(true,priceMoscowMax,priceKrasnodarMax);
     }
 
     @Test
@@ -101,8 +99,7 @@ public class Tests extends BaseRunner {
         tinkoffTariff.setCheckBox("Off","Музыка");
         tinkoffTariff.setCheckBox("Off","Видео");
         tinkoffTariff.setCheckBox("Off","Безлимитные СМС");
-        tinkoffTariff.waitSeconds();
-        assertEquals(tinkoffTariff.checkPrice(),"0 \u20BD");
+        tinkoffTariff.checkPriceEquals(true,tinkoffTariff.checkPrice(),"0 \u20BD");
         tinkoffTariff.checkButton();
     }
 }

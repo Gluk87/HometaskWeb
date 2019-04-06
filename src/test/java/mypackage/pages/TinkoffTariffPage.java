@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TinkoffTariffPage extends Page {
     public TinkoffTariffPage(WebDriver driver) {
@@ -95,7 +96,7 @@ public class TinkoffTariffPage extends Page {
 
     private boolean getCheckBox(String option){
         WebElement checkB = driver.findElement(By.xpath(getLocator(option)+"/.././/input[@type='checkbox']"));
-        logger.info("Чек-бокса "+option+" установлен?: "+checkB.isSelected());
+        logger.info("Чек-бокс "+option+" установлен?: "+checkB.isSelected());
         return checkB.isSelected();
     }
 
@@ -107,6 +108,17 @@ public class TinkoffTariffPage extends Page {
     public void checkButton(){
         driver.findElement(By.xpath("//button")).isEnabled();
         logger.info("Проверка активности кнопки");
+    }
+
+    public void checkPriceEquals(boolean equal,String price1, String price2) {
+        if (equal) {
+            assertEquals(price1, price2);
+            logger.info("Проверка сумм на  эквивалентность: "+price1+" = "+price2);
+        }
+        else {
+            assertNotEquals(price1, price2);
+            logger.info("Проверка сумм на  неэквивалентность: "+price1+" <> "+price2);
+        }
     }
 
 }
